@@ -42,30 +42,40 @@ public class Enemy : MonoBehaviour
         LayerMask combinedMask = whatIsPlayer | whatIsWall;
         RaycastHit hit;
         Debug.DrawRay(transform.position, new Vector3((player.position.x - transform.position.x), player.position.y, (player.position.z - transform.position.z)), Color.red, Time.deltaTime);
-            if (Physics.Raycast(transform.position, (player.position - transform.position), out hit, 20, combinedMask))
+        if (Physics.Raycast(transform.position, (player.position - transform.position), out hit, 20, combinedMask))
+        {
+            Debug.Log(hit.transform.gameObject.name);
+            if (hit.transform == player)
             {
-                Debug.Log(hit.transform.gameObject.name);
-                if (hit.transform == player)
-                {
-                    Debug.Log("Player is within vision");
-                    playerBehindWall = false;
-                } else
-                {
-                    Debug.Log("Player is out of vision");
-                    playerBehindWall = true;
-                }
-            } else
-                {
+                Debug.Log("Player is within vision");
+                playerBehindWall = false;
+            } 
+            else
+            {
+                Debug.Log("Player is out of vision");
+                playerBehindWall = true;
+            }
+        } 
+        else
+        {
             Debug.Log("raycast hit naada");
             playerBehindWall = false;
-                }
-        
+        }
 
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (playerInSightRange && !playerInAttackRange && !playerBehindWall) ChasePlayer();
-        else if (playerInSightRange && playerInAttackRange && !playerBehindWall) AttackPlayer();
-        else if ((!playerInSightRange && !playerInAttackRange) || playerBehindWall) Patroling();
+        if (playerInSightRange && !playerInAttackRange && !playerBehindWall) 
+        {
+            ChasePlayer();
+        }
+        else if (playerInSightRange && playerInAttackRange && !playerBehindWall) 
+        {
+            AttackPlayer();
+        }
+        else if ((!playerInSightRange && !playerInAttackRange) || playerBehindWall)
+        {
+            Patroling();
+        }
     }
 
     private void Patroling()
