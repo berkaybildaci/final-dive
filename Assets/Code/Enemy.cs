@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
   public NavMeshAgent agent;
 
     public Transform player;
+    private Transform shotPoint;
 
     public LayerMask whatIsGround, whatIsPlayer, whatIsWall;
 
@@ -31,44 +32,42 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         player = GameObject.Find("Player").transform;
+        shotPoint = gameObject.transform.GetChild(0);
         agent = GetComponent<NavMeshAgent>();
     }
 
     private void Update()
     {
-        //Physics.SphereCast(transform.position, sightRange, whatIsGround
-        //Check for sight and attack range
+
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        LayerMask combinedMask = whatIsPlayer | whatIsWall;
         RaycastHit hit;
-        Debug.DrawRay(transform.position, new Vector3((player.position.x - transform.position.x), player.position.y, (player.position.z - transform.position.z)), Color.red, Time.deltaTime);
-        if (Physics.Raycast(transform.position, (player.position - transform.position), out hit, 20, combinedMask))
+        Debug.DrawRay(transform.position, (player.position - transform.position), Color.red, Time.deltaTime);
+        if (Physics.Raycast(transform.position, (player.position - transform.position), out hit, 20, whatIsWall))
         {
             Debug.Log(hit.transform.gameObject.name);
-            if (hit.transform == player)
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("WhatIsWall"))
+            {
+                Debug.Log("Player is behind a wall");
+                playerBehindWall = true;
+            }
+            else
             {
                 Debug.Log("Player is within vision");
                 playerBehindWall = false;
-            } 
-            else
-            {
-                Debug.Log("Player is out of vision");
-                playerBehindWall = true;
             }
-        } 
+        }
         else
         {
-            Debug.Log("raycast hit naada");
+            Debug.Log("No obstacles between enemy and player");
             playerBehindWall = false;
         }
-
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-
-        if (playerInSightRange && !playerInAttackRange && !playerBehindWall) 
+        // Inside Update function, modify the conditions for chasing the player
+        if (playerInSightRange && !playerInAttackRange && !playerBehindWall)
         {
             ChasePlayer();
         }
-        else if (playerInSightRange && playerInAttackRange && !playerBehindWall) 
+        else if (playerInSightRange && playerInAttackRange && !playerBehindWall)
         {
             AttackPlayer();
         }
@@ -119,7 +118,7 @@ public class Enemy : MonoBehaviour
         if (!alreadyAttacked)
         {
             ///Attack code here
-            Rigidbody rb  = Instantiate(projectile, transform.position, UnityEngine.Quaternion.identity).GetComponent<Rigidbody>();
+            Rigidbody rb  = Instantiate(projectile, shotPoint.transform.position, UnityEngine.Quaternion.identity).GetComponent<Rigidbody>();
             rb.AddForce(transform.forward*32f, ForceMode.Impulse);
             rb.AddForce(transform.up*8f, ForceMode.Impulse);
             ///
