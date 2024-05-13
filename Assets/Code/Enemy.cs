@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -29,8 +30,11 @@ public class Enemy : MonoBehaviour
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange, playerBehindWall;
 
+    //useless and delete later
+    public TextMeshProUGUI text;
     private void Awake()
     {
+        text.enabled = false;
         player = GameObject.Find("Player").transform;
         shotPoint = gameObject.transform.GetChild(0);
         agent = GetComponent<NavMeshAgent>();
@@ -76,7 +80,15 @@ public class Enemy : MonoBehaviour
             Patroling();
         }
     }
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.name == "Player")
+        {
+            Destroy(this.gameObject);
+            text.enabled = true;
+            Debug.Log("brrrrr");
+        }
+    }
     private void Patroling()
     {
         if (!walkPointSet) SearchWalkPoint();

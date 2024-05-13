@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Timeline;
@@ -33,6 +34,8 @@ public class EntityMovement : MonoBehaviour
     private int camCounter = 0; //counter for bobbing
     private bool goingUp = true; //bool for camera bobbing current direction
     public float bobRate; //The speed at which to bob camera at when grounded
+
+
 
     void Start()
     {
