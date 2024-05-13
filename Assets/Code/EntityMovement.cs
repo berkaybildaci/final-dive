@@ -18,6 +18,7 @@ public class EntityMovement : MonoBehaviour
     public float lookXLimit = 45f;
     public bool canMove = true;
     CharacterController characterController;
+    public float tempHealth;
 
     public int jumps = 0;
     public int maxJumps;
@@ -42,6 +43,7 @@ public class EntityMovement : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        tempHealth = 100f;
     }
 
     void Update()
