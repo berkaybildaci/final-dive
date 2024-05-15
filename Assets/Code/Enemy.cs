@@ -36,6 +36,7 @@ public class Enemy : MonoBehaviour
         player = GameObject.Find("Player").transform;
         shotPoint = gameObject.transform.GetChild(0);
         agent = GetComponent<NavMeshAgent>();
+        agent.autoBraking = false;
     }
 
     private void Update()
