@@ -31,13 +31,12 @@ public class Enemy : MonoBehaviour
     public bool playerInSightRange, playerInAttackRange, playerBehindWall;
 
     //useless and delete later
-    public TextMeshProUGUI text;
     private void Awake()
     {
-        text.enabled = false;
         player = GameObject.Find("Player").transform;
         shotPoint = gameObject.transform.GetChild(0);
         agent = GetComponent<NavMeshAgent>();
+        agent.autoBraking = false;
     }
 
     private void Update()
@@ -85,7 +84,6 @@ public class Enemy : MonoBehaviour
         if(collision.gameObject.name == "Player")
         {
             Destroy(this.gameObject);
-            text.enabled = true;
             Debug.Log("brrrrr");
         }
     }
@@ -131,8 +129,8 @@ public class Enemy : MonoBehaviour
         {
             ///Attack code here
             Rigidbody rb  = Instantiate(projectile, shotPoint.transform.position, UnityEngine.Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward*32f, ForceMode.Impulse);
-            rb.AddForce(transform.up*8f, ForceMode.Impulse);
+            rb.AddForce(transform.forward*32 * 5f, ForceMode.Impulse);
+            rb.AddForce(transform.up*8 * 5f, ForceMode.Impulse);
             ///
 
             alreadyAttacked = true;
