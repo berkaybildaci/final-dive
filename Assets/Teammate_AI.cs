@@ -5,11 +5,12 @@ using UnityEngine.AI;
 
 public class Teammate_AI : MonoBehaviour
 {
-    public NavMeshAgent agent1;
-
+    public NavMeshAgent agent;
+    private Transform enemyContainer;
     public Transform player;
-    public Transform enemy;
+    public Transform target;
     private Transform shotPoint;
+    private Transform enemy;
 
     public LayerMask whatIsGround, whatIsPlayer, whatIsEnemy, whatIsWall;
 
@@ -30,59 +31,78 @@ public class Teammate_AI : MonoBehaviour
     {
         player = GameObject.Find("Player").transform;
         shotPoint = gameObject.transform.GetChild(0);
-        agent1 = GetComponent<NavMeshAgent>();
-        agent1.autoBraking = false;
+        agent = GetComponent<NavMeshAgent>();
+        agent.autoBraking = false;
+        enemyContainer = GameObject.Find("EnemyContainer").transform;
     }
 
     private void Update()
     {
-
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        RaycastHit hit;
-        Debug.DrawRay(transform.position, (enemy.position - transform.position), Color.red, Time.deltaTime);
-        if (Physics.Raycast(transform.position, (enemy.position - transform.position), out hit, 20, whatIsWall))
+        if (enemyContainer.transform.childCount != 0)
         {
-            //Debug.Log(hit.transform.gameObject.name);
-            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("WhatIsWall"))
+            getClosestEnemy();
+            RaycastHit hit;
+            Debug.DrawRay(transform.position, (enemy.position - transform.position), Color.red, Time.deltaTime);
+            if (Physics.Raycast(transform.position, (enemy.position - transform.position), out hit, 20, whatIsWall))
             {
-                //Debug.Log("Player is behind a wall");
-                enemyBehindWall = true;
+                //Debug.Log(hit.transform.gameObject.name);
+                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("WhatIsWall"))
+                {
+                    //Debug.Log("Player is behind a wall");
+                    enemyBehindWall = true;
+                }
+                else
+                {
+                    //Debug.Log("Player is within vision");
+                    enemyBehindWall = false;
+                }
             }
             else
             {
-                //Debug.Log("Player is within vision");
+                //Debug.Log("No obstacles between enemy and player");
                 enemyBehindWall = false;
             }
         }
-        else
-        {
-            //Debug.Log("No obstacles between enemy and player");
-            enemyBehindWall = false;
-        }
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         enemyInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsEnemy);
         // Inside Update function, modify the conditions for chasing the player
-        ChasePlayer();
         if (enemyInAttackRange && !enemyBehindWall)
         {
             AttackEnemy();
+        }
+        else
+        {
+            ChasePlayer();
+        }
+    }
+
+    public void getClosestEnemy()
+    {
+        enemy = enemyContainer.GetChild(0);
+        for (int i = 0; i < enemyContainer.transform.childCount; i++)
+        {
+            if (Vector3.Distance(transform.position, enemy.position) > Vector3.Distance(transform.position, enemyContainer.GetChild(i).position))
+            {
+                enemy = enemyContainer.GetChild(i);
+            }
         }
     }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "Player")
         {
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
             //Debug.Log("brrrrr");
         }
     }
     private void ChasePlayer()
     {
-        agent1.SetDestination(player.position);
+        agent.SetDestination(target.position);
     }
     private void AttackEnemy()
     {
         //Make sure enemy doesn't move
-        agent1.SetDestination(transform.position);
+        agent.SetDestination(transform.position);
 
         transform.LookAt(enemy);
 
@@ -91,7 +111,6 @@ public class Teammate_AI : MonoBehaviour
             ///Attack code here
             Rigidbody rb = Instantiate(projectile, shotPoint.transform.position, transform.rotation * projectile.transform.rotation).GetComponentInChildren<Rigidbody>();
             rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
