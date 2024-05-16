@@ -15,7 +15,7 @@ public class calculate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = Quaternion.Euler(new Vector3(useful.transform.rotation.x,4f, 0f));
+        transform.rotation = Quaternion.Euler(new Vector3(useful.transform.rotation.x,0f, 0f));
         //transform.position = parent.transform.position + new Vector3(0f, 4.5f, 1.2f);
     }
 }
