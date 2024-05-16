@@ -21,6 +21,6 @@ public class Bullet : MonoBehaviour
         {
             collision.gameObject.GetComponent<EntityMovement>().tempHealth -= 5;
         }
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 }

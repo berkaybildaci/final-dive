@@ -27,6 +27,7 @@ public class boomba : MonoBehaviour
                 Debug.Log("Applying explosion force to: " + nearbyObject.gameObject.name);
                 rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
             }
+            
         }
 
         Destroy(gameObject);
