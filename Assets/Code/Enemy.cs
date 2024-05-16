@@ -47,21 +47,21 @@ public class Enemy : MonoBehaviour
         Debug.DrawRay(transform.position, (player.position - transform.position), Color.red, Time.deltaTime);
         if (Physics.Raycast(transform.position, (player.position - transform.position), out hit, 20, whatIsWall))
         {
-            Debug.Log(hit.transform.gameObject.name);
+            //Debug.Log(hit.transform.gameObject.name);
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("WhatIsWall"))
             {
-                Debug.Log("Player is behind a wall");
+                //Debug.Log("Player is behind a wall");
                 playerBehindWall = true;
             }
             else
             {
-                Debug.Log("Player is within vision");
+                //Debug.Log("Player is within vision");
                 playerBehindWall = false;
             }
         }
         else
         {
-            Debug.Log("No obstacles between enemy and player");
+            //Debug.Log("No obstacles between enemy and player");
             playerBehindWall = false;
         }
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
@@ -84,7 +84,7 @@ public class Enemy : MonoBehaviour
         if(collision.gameObject.name == "Player")
         {
             Destroy(this.gameObject);
-            Debug.Log("brrrrr");
+            //Debug.Log("brrrrr");
         }
     }
     private void Patroling()
