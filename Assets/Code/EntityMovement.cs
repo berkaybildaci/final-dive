@@ -151,4 +151,13 @@ public class EntityMovement : MonoBehaviour
             //stopping the code without needing to run asynchnously.
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "BulletContainer(Clone)")
+            tempHealth -= 26;
+
+        if(tempHealth <= 0)
+            Destroy(gameObject);
+    }
+
 }

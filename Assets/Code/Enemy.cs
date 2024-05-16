@@ -128,10 +128,9 @@ public class Enemy : MonoBehaviour
         if (!alreadyAttacked)
         {
             ///Attack code here
-            Rigidbody rb  = Instantiate(projectile, shotPoint.transform.position, UnityEngine.Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward*32 * 5f, ForceMode.Impulse);
-            rb.AddForce(transform.up*8 * 5f, ForceMode.Impulse);
-            ///
+            Rigidbody rb  = Instantiate(projectile, shotPoint.transform.position, transform.rotation * projectile.transform.rotation).GetComponentInChildren<Rigidbody>();
+            rb.AddForce(transform.forward*32f, ForceMode.Impulse);
+            
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
