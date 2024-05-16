@@ -29,6 +29,6 @@ public class boomba : MonoBehaviour
             }
         }
 
-        //Destroy(gameObject);
+        Destroy(gameObject);
     }
 }
