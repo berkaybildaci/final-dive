@@ -13281,18 +13281,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 4280104313537945805, guid: 0a7519d778b2d964b8018a95058d7149, type: 3}
-      propertyPath: text
-      value: 
-      objectReference: {fileID: 2040851611}
-    - target: {fileID: 4280104313537945805, guid: 0a7519d778b2d964b8018a95058d7149, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1171062788}
-    - target: {fileID: 4280104313537945805, guid: 0a7519d778b2d964b8018a95058d7149, type: 3}
-      propertyPath: sightRange
-      value: 50
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17061,14 +17049,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4280104313537945805, guid: 0a7519d778b2d964b8018a95058d7149, type: 3}
-      propertyPath: text
-      value: 
-      objectReference: {fileID: 2040851611}
-    - target: {fileID: 4280104313537945805, guid: 0a7519d778b2d964b8018a95058d7149, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1171062788}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -24006,14 +23986,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 4280104313537945805, guid: 0a7519d778b2d964b8018a95058d7149, type: 3}
-      propertyPath: text
-      value: 
-      objectReference: {fileID: 2040851611}
-    - target: {fileID: 4280104313537945805, guid: 0a7519d778b2d964b8018a95058d7149, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1171062788}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -41491,14 +41463,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 4280104313537945805, guid: 0a7519d778b2d964b8018a95058d7149, type: 3}
-      propertyPath: text
-      value: 
-      objectReference: {fileID: 2040851611}
-    - target: {fileID: 4280104313537945805, guid: 0a7519d778b2d964b8018a95058d7149, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1171062788}
     - target: {fileID: 8438194877324519022, guid: 0a7519d778b2d964b8018a95058d7149, type: 3}
       propertyPath: m_Mass
       value: 1
