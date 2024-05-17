@@ -16,7 +16,7 @@ public class EntityData : MonoBehaviour
     {
         if(health <= 0)
         {
-            Destroy(transform);
+            Destroy(gameObject);
         }
     }
 
