@@ -8,6 +8,7 @@ public class boss : MonoBehaviour
 {
     public Transform player;
     private float timer;
+    public float moveSpeed = 10f;
     public float rotationSpeed = 10f;
     private Rigidbody rBody;
     public Transform shotPoint;
@@ -25,11 +26,21 @@ public class boss : MonoBehaviour
     public Transform shotPointM1;
     public Transform shotPointM2;
 
+
+    public GameObject missileAttack;
+    public float missileTBA = 10f;
+    public float deviationMissile = 20f;
+    private float missileTimer = 0;
+    public Transform missilePoint;
+
+    private float timeBucket = 0f;
+    private Boolean ramMode;
     // Start is called before the first frame update
     void Start()
     {
         rBody = GetComponent<Rigidbody>();
         rBody.freezeRotation = true;
+        ramMode = false;
     }
 
     // Update is called once per frame
@@ -41,7 +52,7 @@ public class boss : MonoBehaviour
         rBody.rotation = Quaternion.Slerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         //transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
         Rigidbody rb = GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * 10, ForceMode.Force);
+
         /*
         timer -= Time.deltaTime;
         if (timer < 0)
@@ -51,10 +62,43 @@ public class boss : MonoBehaviour
             rb.AddForce(transform.forward * 10, ForceMode.Force);
         }
         */
-        fireMain();
-        fireMini();
+        
+        if(timeBucket > 20)
+        {
+            timeBucket = 0;
+            if(UnityEngine.Random.Range(0f, 1f) > 0.0f)
+            {
+                ramMode = true;
+                Invoke("resetRam", 10f);
+            }
+        }
+        if(!ramMode)
+            rb.AddForce(transform.forward * moveSpeed, ForceMode.Force);
+        else
+        {
+            if(timeBucket > 5f)
+            {
+                rb.AddForce(transform.forward * moveSpeed * 4, ForceMode.Force);
+            }
+            else
+            {
+
+            }
+        }
+        if (!ramMode)
+        {
+            fireMain();
+            fireMini();
+            fireMissile();
+        }
         mainTimer += Time.deltaTime;
         miniTimer += Time.deltaTime;
+        missileTimer += Time.deltaTime;
+        timeBucket += Time.deltaTime;
+    }
+    void resetRam()
+    {
+        ramMode = false;
     }
     void fireMain()
     {
@@ -101,5 +145,46 @@ public class boss : MonoBehaviour
             go.transform.rotation = toRotation;
 
         }
+    }
+    int count = 0;
+    void fireMissile()
+    {
+        if(missileTimer > missileTBA)
+        {
+            count = 0;
+            missileTimer = 0;
+            Invoke("part1", .1f);
+
+        }
+    }
+    void part1()
+    {
+        if (count < 50)
+            Invoke("part1", .1f);
+        count++;
+        GameObject go = Instantiate(missileAttack, missilePoint.position, Quaternion.identity);
+        Rigidbody rb = go.GetComponent<Rigidbody>();
+        rb.AddForce(go.transform.up * 50f, ForceMode.Impulse);
+        StartCoroutine(part2(go));
+
+    }
+    IEnumerator part2(GameObject go)
+    {
+        yield return new WaitForSeconds(2f);
+        Rigidbody rb = go.GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        Vector3 relativePos = player.position - (go.transform.position +
+                new Vector3(UnityEngine.Random.Range(-deviationMissile, deviationMissile), UnityEngine.Random.Range(-deviationMissile, deviationMissile), UnityEngine.Random.Range(-deviationMissile, deviationMissile)));
+        Quaternion toRotation = Quaternion.LookRotation(relativePos);
+        go.transform.rotation = toRotation;
+        rb.AddForce(go.transform.forward * 80f, ForceMode.Impulse);
+        toRotation *= Quaternion.Euler(90f, 0, 0);
+        go.transform.rotation = toRotation;
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Player") Destroy(collision.gameObject);
     }
 }
