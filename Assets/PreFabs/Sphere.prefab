@@ -110,7 +110,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.2
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &-5864673568180374437
 Rigidbody:
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionRadius: 50
-  explosionForce: 1000
+  explosionForce: 100000
   grenadeExplosion: {fileID: 6071925411809113573}
   startTime: 60
   grenadeVisual: {fileID: 5684991174275197454}

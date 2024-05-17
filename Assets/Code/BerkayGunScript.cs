@@ -31,7 +31,7 @@ public class BerkayGunScript : MonoBehaviour
     void Shoot()
     {
         GameObject bullet = Instantiate(bulletPrefab, shotPoint.transform.position, shotPoint.transform.rotation);
-        bullet.GetComponent<Rigidbody>().velocity = shotPoint.transform.forward * 10f;
+        bullet.GetComponent<Rigidbody>().velocity = shotPoint.transform.forward * 40f;
         muzzleFlash.GetComponent<ParticleSystem>().Play();
     }
 }
