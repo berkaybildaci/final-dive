@@ -32,6 +32,10 @@ public class explode : MonoBehaviour
             {
                 Debug.Log("Applying explosion force to: " + nearbyObject.gameObject.name);
                 rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
+                if(nearbyObject.GetComponent<EntityData>() != null && nearbyObject.tag == "Enemy")
+                {
+                    nearbyObject.GetComponent<EntityData>().damage(10);
+                }
             }
 
         }
