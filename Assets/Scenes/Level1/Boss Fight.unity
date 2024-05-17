@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &5897407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5897408}
+  m_Layer: 0
+  m_Name: lazerPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5897408
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5897407}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1178836614}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &39575209 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8966165731460605578, guid: ca8dac4bf29902f4aa5fd00d9429d5a3, type: 3}
@@ -184,7 +215,7 @@ Transform:
   m_GameObject: {fileID: 429719004}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.4}
+  m_LocalPosition: {x: 0, y: 1.5, z: -0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -391,6 +422,7 @@ Transform:
   - {fileID: 352302952}
   - {fileID: 718390785}
   - {fileID: 429719005}
+  - {fileID: 5897408}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1178836615
@@ -418,9 +450,11 @@ MonoBehaviour:
   shotPointM1: {fileID: 352302952}
   shotPointM2: {fileID: 718390785}
   missileAttack: {fileID: 3635938751557375011, guid: 2dc7ff89617fdc2468d9c597937b98ca, type: 3}
-  missileTBA: 15
+  missileTBA: 20
   deviationMissile: 25
   missilePoint: {fileID: 429719005}
+  lazerPoint: {fileID: 5897408}
+  lazer: {fileID: 1357193239522952466, guid: 5b38d22d89470f74cb5bce8f7b1f5528, type: 3}
 --- !u!54 &1178836616
 Rigidbody:
   m_ObjectHideFlags: 0
