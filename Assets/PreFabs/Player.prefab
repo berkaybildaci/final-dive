@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 9203221009949939841}
   - component: {fileID: 8550620176582919960}
   - component: {fileID: 7404517465155294062}
+  - component: {fileID: 3814603098780245876}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -97,9 +98,9 @@ MonoBehaviour:
   dashRechargeSpeed: 3
   dashPower: 15
   dashTime: 0.5
-  topCount: 10
-  bottomCount: 10
-  bobRate: 3
+  topCount: 5
+  bottomCount: -5
+  bobRate: 0.2
 --- !u!143 &4804671081516856574
 CharacterController:
   m_ObjectHideFlags: 0
@@ -204,6 +205,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunScriptInstance: {fileID: 1602433559917281032}
+--- !u!114 &3814603098780245876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026722966867969729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef2d1fb9a304e894dbce76a91a3304f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!1 &2707351559481991320
 GameObject:
   m_ObjectHideFlags: 0
