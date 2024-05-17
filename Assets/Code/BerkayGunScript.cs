@@ -21,13 +21,16 @@ public class BerkayGunScript : MonoBehaviour
         if(pickedUp)
         {
             gameObject.GetComponent<MeshRenderer>().enabled = true;
+            if(Input.GetMouseButtonDown(0))
+            {
+                Shoot();
+            }
         }
-        //transform.position = mainCamera.transform.position;
-        //ransform.rotation = mainCamera.transform.rotation;
     }
 
     void Shoot()
     {
         GameObject bullet = Instantiate(bulletPrefab, shotPoint.transform.position, shotPoint.transform.rotation);
+        bullet.GetComponent<Rigidbody>().AddForce(shotPoint.transform.forward * bullet.GetComponent<Rigidbody>().mass * 100f);
     }
 }
