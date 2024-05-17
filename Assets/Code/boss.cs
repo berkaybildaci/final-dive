@@ -35,12 +35,18 @@ public class boss : MonoBehaviour
 
     private float timeBucket = 0f;
     private Boolean ramMode;
+    private Boolean lazerMode;
+    public Transform lazerPoint;
+    public GameObject lazer;
+    private float delay;
     // Start is called before the first frame update
     void Start()
     {
         rBody = GetComponent<Rigidbody>();
         rBody.freezeRotation = true;
         ramMode = false;
+        lazerMode = false;
+        delay = 0;
     }
 
     // Update is called once per frame
@@ -63,29 +69,56 @@ public class boss : MonoBehaviour
         }
         */
         
-        if(timeBucket > 20)
+        if(timeBucket > 30)
         {
             timeBucket = 0;
             if(UnityEngine.Random.Range(0f, 1f) > 0.0f)
             {
-                ramMode = true;
-                Invoke("resetRam", 10f);
+                if (UnityEngine.Random.Range(0f, 1f) > 0.99f)
+                {
+                    ramMode = true;
+                    Invoke("resetRam", 10f);
+                }
+                else
+                {
+                    lazerMode = true;
+                    Invoke("resetLazer", 10f);
+                }
             }
         }
-        if(!ramMode)
+        if(!ramMode && !lazerMode)
             rb.AddForce(transform.forward * moveSpeed, ForceMode.Force);
         else
         {
-            if(timeBucket > 5f)
+            if (ramMode)
             {
-                rb.AddForce(transform.forward * moveSpeed * 4, ForceMode.Force);
-            }
-            else
-            {
+                if (timeBucket > 5f)
+                {
+                    rb.AddForce(transform.forward * moveSpeed * 4, ForceMode.Force);
+                }
+                else
+                {
 
+                }
+            }
+            else if(lazerMode )
+            {
+                if (timeBucket > 5f)
+                {
+                    Quaternion toRotation2 = transform.rotation * Quaternion.Euler(90f, 0, 0);
+                    GameObject gb = Instantiate(lazer, lazerPoint.position, transform.rotation);
+                    Rigidbody rb2 = gb.GetComponent<Rigidbody>();
+                    rb2.AddForce(gb.transform.forward * 500f, ForceMode.Impulse);
+                    gb.transform.rotation = toRotation2;
+
+                }
+                else
+                {
+
+                }
             }
         }
-        if (!ramMode)
+        if (!ramMode && !lazerMode)
         {
             fireMain();
             fireMini();
@@ -99,6 +132,10 @@ public class boss : MonoBehaviour
     void resetRam()
     {
         ramMode = false;
+    }
+    void resetLazer()
+    {
+        lazerMode = false;
     }
     void fireMain()
     {
