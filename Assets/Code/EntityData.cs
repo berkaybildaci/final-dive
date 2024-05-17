@@ -20,8 +20,9 @@ public class EntityData : MonoBehaviour
         {
             healthBarUI.fillAmount = (float)(health / maxHealth);
         }
-        if(health <= 0)
+        if(health <= 0 && gameObject.tag == "Enemy")
         {
+            BerkayEnemySpawner.instance.UpdateKillCount();
             Destroy(gameObject);
         }
     }

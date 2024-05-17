@@ -76,14 +76,6 @@ public class Enemy : MonoBehaviour
             Patroling();
         }
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.name == "Player")
-        {
-            Destroy(this.gameObject);
-            //Debug.Log("brrrrr");
-        }
-    }
     private void Patroling()
     {
         if (!walkPointSet) SearchWalkPoint();

@@ -43,6 +43,7 @@ public class explode : MonoBehaviour
         GameObject ps = Instantiate(grenadeExplosion.gameObject, transform.position, transform.rotation);
         ps.GetComponent<ParticleSystem>().Play();
         ps.GetComponent<genericProjectileScript>().enabled = true;
+        UIHandler.UIHandlerInstance.StartFade();
 
     }
 }
