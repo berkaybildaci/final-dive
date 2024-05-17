@@ -22,6 +22,10 @@ public class genericProjectileScript : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        if(collision.gameObject.GetComponent<EntityData>() != null && collision.gameObject.tag == "Enemy")
+        {
+            collision.gameObject.GetComponent<EntityData>().damage(5);
+        }
         Destroy(gameObject);
     }
 }

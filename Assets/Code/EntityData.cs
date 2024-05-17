@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class EntityData : MonoBehaviour
 {
-    public int health;
-    public int maxHealth;
+    public float health;
+    public float maxHealth;
     public Image healthBarUI;
     // Start is called before the first frame update
     void Start()
@@ -18,7 +18,7 @@ public class EntityData : MonoBehaviour
     {
         if(healthBarUI != null)
         {
-            healthBarUI.fillAmount = health / maxHealth;
+            healthBarUI.fillAmount = (float)(health / maxHealth);
         }
         if(health <= 0)
         {
