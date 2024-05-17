@@ -63,13 +63,30 @@ public class boss : MonoBehaviour
         }
         */
         
+<<<<<<< Updated upstream
         if(timeBucket > 20)
+=======
+        if(timeBucket > 60)
+>>>>>>> Stashed changes
         {
             timeBucket = 0;
             if(UnityEngine.Random.Range(0f, 1f) > 0.0f)
             {
+<<<<<<< Updated upstream
                 ramMode = true;
                 Invoke("resetRam", 10f);
+=======
+                if (UnityEngine.Random.Range(0f, 1f) > 0.5f)
+                {
+                    ramMode = true;
+                    Invoke("resetRam", 10f);
+                }
+                else
+                {
+                    lazerMode = true;
+                    Invoke("resetLazer", 10f);
+                }
+>>>>>>> Stashed changes
             }
         }
         if(!ramMode)
@@ -78,10 +95,33 @@ public class boss : MonoBehaviour
         {
             if(timeBucket > 5f)
             {
+<<<<<<< Updated upstream
                 rb.AddForce(transform.forward * moveSpeed * 4, ForceMode.Force);
+=======
+                if (timeBucket > 5f)
+                {
+                    rb.AddForce(transform.forward * moveSpeed * 2.5f, ForceMode.Force);
+                }
+                else
+                {
+
+                }
+>>>>>>> Stashed changes
             }
             else
             {
+<<<<<<< Updated upstream
+=======
+                if (timeBucket > 5f)
+                {
+                    Quaternion toRotation2 = transform.rotation * Quaternion.Euler(90f, 0, 0);
+                    GameObject gb = Instantiate(lazer, lazerPoint.position, transform.rotation);
+                    gb.GetComponent<Collider>().enabled = false;
+                    StartCoroutine(enable(gb.GetComponent<Collider>()));
+                    Rigidbody rb2 = gb.GetComponent<Rigidbody>();
+                    rb2.AddForce(gb.transform.forward * 500f, ForceMode.Impulse);
+                    gb.transform.rotation = toRotation2;
+>>>>>>> Stashed changes
 
             }
         }
@@ -95,6 +135,11 @@ public class boss : MonoBehaviour
         miniTimer += Time.deltaTime;
         missileTimer += Time.deltaTime;
         timeBucket += Time.deltaTime;
+    }
+    IEnumerator enable(Collider c)
+    {
+        yield return new WaitForSeconds(.1f);
+        c.enabled = true;
     }
     void resetRam()
     {
@@ -153,18 +198,18 @@ public class boss : MonoBehaviour
         {
             count = 0;
             missileTimer = 0;
-            Invoke("part1", .1f);
+            Invoke("part1", .15f);
 
         }
     }
     void part1()
     {
-        if (count < 50)
-            Invoke("part1", .1f);
+        if (count < 40)
+            Invoke("part1", .15f);
         count++;
         GameObject go = Instantiate(missileAttack, missilePoint.position, Quaternion.identity);
         Rigidbody rb = go.GetComponent<Rigidbody>();
-        rb.AddForce(go.transform.up * 50f, ForceMode.Impulse);
+        rb.AddForce(go.transform.up * 100f, ForceMode.Impulse);
         StartCoroutine(part2(go));
 
     }
@@ -179,7 +224,7 @@ public class boss : MonoBehaviour
                 new Vector3(UnityEngine.Random.Range(-deviationMissile, deviationMissile), UnityEngine.Random.Range(-deviationMissile, deviationMissile), UnityEngine.Random.Range(-deviationMissile, deviationMissile)));
         Quaternion toRotation = Quaternion.LookRotation(relativePos);
         go.transform.rotation = toRotation;
-        rb.AddForce(go.transform.forward * 80f, ForceMode.Impulse);
+        rb.AddForce(go.transform.forward * 120f, ForceMode.Impulse);
         toRotation *= Quaternion.Euler(90f, 0, 0);
         go.transform.rotation = toRotation;
     }
