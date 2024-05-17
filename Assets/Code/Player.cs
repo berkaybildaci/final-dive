@@ -18,7 +18,7 @@ public class EntityMovement : MonoBehaviour
     public float lookXLimit = 45f;
     public bool canMove = true;
     CharacterController characterController;
-    public float tempHealth;
+    public float health;
 
     public int jumps = 0;
     public int maxJumps;
@@ -36,14 +36,11 @@ public class EntityMovement : MonoBehaviour
     private bool goingUp = true; //bool for camera bobbing current direction
     public float bobRate; //The speed at which to bob camera at when grounded
 
-
-
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        tempHealth = 100f;
     }
 
     void Update()
@@ -153,11 +150,13 @@ public class EntityMovement : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "BulletContainer(Clone)")
-            tempHealth -= 26;
-
-        if(tempHealth <= 0)
+        if(health <= 0)
             Destroy(gameObject);
+    }
+
+    public void damage(int pain)
+    {
+        health-=pain;
     }
 
 }

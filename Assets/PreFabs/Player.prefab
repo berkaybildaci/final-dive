@@ -42,13 +42,13 @@ GameObject:
   - component: {fileID: 8966165731460605578}
   - component: {fileID: 4804671081516856574}
   - component: {fileID: 8774487209873755428}
-  - component: {fileID: 6939819054009972954}
   - component: {fileID: 9203221009949939841}
   - component: {fileID: 8550620176582919960}
   - component: {fileID: 7404517465155294062}
+  - component: {fileID: -5692928200119354672}
   m_Layer: 7
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,7 +106,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2026722966867969729}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 25
   m_Drag: 0
   m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -125,36 +125,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &6939819054009972954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2026722966867969729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbb8ce368eca0934fba374095e2ff065, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCamera: {fileID: 7900232184053738652}
-  playerSpeed: 10
-  playerJumpPower: 5
-  gravity: 15
-  lookSpeed: 2
-  lookXLimit: 45
-  canMove: 1
-  tempHealth: 0
-  jumps: 1
-  maxJumps: 1
-  dashes: 1
-  maxDashes: 1
-  dashRechargeSpeed: 3
-  dashPower: 2
-  dashTime: 1
-  topCount: 5
-  bottomCount: 5
-  bobRate: 2
 --- !u!136 &9203221009949939841
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -206,6 +176,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunScriptInstance: {fileID: 1602433559917281032}
+--- !u!114 &-5692928200119354672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026722966867969729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb8ce368eca0934fba374095e2ff065, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
+  playerSpeed: 10
+  playerJumpPower: 5
+  gravity: 15
+  lookSpeed: 2
+  lookXLimit: 45
+  canMove: 1
+  health: 100
+  jumps: 1
+  maxJumps: 1
+  dashes: 1
+  maxDashes: 1
+  dashRechargeSpeed: 3
+  dashPower: 15
+  dashTime: 0.5
+  topCount: 10
+  bottomCount: 10
+  bobRate: 3
 --- !u!1 &2707351559481991320
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<EntityMovement>() != null)
         {
-            collision.gameObject.GetComponent<EntityMovement>().tempHealth -= 5;
+            collision.gameObject.GetComponent<EntityMovement>().damage(5);
         }
         Destroy(transform.parent.gameObject);
     }
