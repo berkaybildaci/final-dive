@@ -32,5 +32,6 @@ public class BerkayGunScript : MonoBehaviour
     {
         GameObject bullet = Instantiate(bulletPrefab, shotPoint.transform.position, shotPoint.transform.rotation);
         bullet.GetComponent<Rigidbody>().AddForce(shotPoint.transform.forward * bullet.GetComponent<Rigidbody>().mass * 100f);
+        muzzleFlash.GetComponent<ParticleSystem>().Play();
     }
 }
