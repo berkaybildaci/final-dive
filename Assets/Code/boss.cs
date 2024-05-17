@@ -69,12 +69,12 @@ public class boss : MonoBehaviour
         Rigidbody rb = GetComponent<Rigidbody>();
 
 
-            if (timeBucket > 30)
+            if (timeBucket > 40)
             {
                 timeBucket = 0;
                 if (UnityEngine.Random.Range(0f, 1f) > 0.0f)
                 {
-                    if (UnityEngine.Random.Range(0f, 1f) > 2f)
+                    if (UnityEngine.Random.Range(0f, 1f) > .5f)
                     {
                         ramMode = true;
                         Invoke("resetRam", 10f);
@@ -91,7 +91,7 @@ public class boss : MonoBehaviour
             else{
                 if (ramMode){
                     if (timeBucket > 5f){
-                        rb.AddForce(transform.forward * moveSpeed * 2.5f, ForceMode.Force);
+                        rb.AddForce(transform.forward * moveSpeed * 3f, ForceMode.Force);
                         }
                     else{
 
