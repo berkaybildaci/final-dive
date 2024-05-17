@@ -7,15 +7,20 @@ public class explode : MonoBehaviour
 {
     public float explosionRadius = 50f;
     public float explosionForce = 1000f;
+    public ParticleSystem grenadeExplosion;
+    public float startTime = 60f;
+    private float currentTime;
+    public GameObject grenadeVisual;
     // Start is called before the first frame update
     void Start()
     {
-
+        currentTime = startTime;
     }
 
     // Update is called once per frame
     void Update()
     {
+        transform.Rotate(1, 1, 1);
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -30,7 +35,9 @@ public class explode : MonoBehaviour
             }
 
         }
-
         Destroy(gameObject);
+        GameObject ps = Instantiate(grenadeExplosion.gameObject, transform.position, transform.rotation);
+        ps.GetComponent<ParticleSystem>().Play();
     }
+    
 }
