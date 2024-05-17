@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private float lifeTime = 3f;
+    public int damage;
     private float startTime;
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<EntityData>() != null)
         {
-            collision.gameObject.GetComponent<EntityData>().damage(5);
+            collision.gameObject.GetComponent<EntityData>().damage(damage);
         }
         Destroy(transform.parent.gameObject);
     }
