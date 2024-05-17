@@ -224,7 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grenade: {fileID: 5181336601655348339, guid: 1dfd6835794fa994393593afa918ca8e, type: 3}
   useful: {fileID: 1567847561329902742}
-  shotPoint: {fileID: 8966165731460605578}
+  shotPoint: {fileID: 7979484558912549567}
 --- !u!114 &7404517465155294062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,13 +433,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5127691560535336603}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.224, z: 0.005}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.32, z: 0.005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4348136108687212319}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &8450258507356443453
 GameObject:
   m_ObjectHideFlags: 0
@@ -1164,7 +1164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 2707351559481991320}
   pickedUp: 0
-  bulletPrefab: {fileID: 1357193239522952466, guid: 5b38d22d89470f74cb5bce8f7b1f5528, type: 3}
+  bulletPrefab: {fileID: 4781569259241673070, guid: 71ab02120db2a4c06b9372ef9ab8244f, type: 3}
   shotPoint: {fileID: 5127691560535336603}
   muzzleFlash: {fileID: 8391170963941011748}
 --- !u!1001 &8391714693702160618
