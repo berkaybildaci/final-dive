@@ -35,70 +35,110 @@ public class boss : MonoBehaviour
 
     private float timeBucket = 0f;
     private Boolean ramMode;
+    private Boolean lazerMode;
+    public Transform lazerPoint;
+    public GameObject lazer;
+    private float delay;
     // Start is called before the first frame update
     void Start()
     {
         rBody = GetComponent<Rigidbody>();
         rBody.freezeRotation = true;
         ramMode = false;
+        lazerMode = true;
+        delay = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Quaternion sourceRotation = transform.rotation;
+
+        /*
+        Quaternion sourceRotation = transform.rotation;
+        Quaternion targetRotation = Quaternion.LookRotation(targetTransform.position - transform.position);
+
+        float maxDegreesDelta = maxRotationSpeed * Time.deltaTime;
+        transform.rotation = Quaternion.RotateTowards(sourceRotation, targetRotation, maxDegreesDelta);
+        */
         Vector3 relativePos = player.position - transform.position;
         relativePos.y = 0;
         Quaternion toRotation = Quaternion.LookRotation(relativePos);
-        rBody.rotation = Quaternion.Slerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+        rBody.rotation = Quaternion.SlerpUnclamped(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         //transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
         Rigidbody rb = GetComponent<Rigidbody>();
 
-        /*
-        timer -= Time.deltaTime;
-        if (timer < 0)
-        {
-            transform.LookAt(player);
-            Rigidbody rb = GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 10, ForceMode.Force);
-        }
-        */
 
-        if (timeBucket > 20)
-        {
-            timeBucket = 0;
-            if (UnityEngine.Random.Range(0f, 1f) > 0.0f)
+            if (timeBucket > 30)
             {
-                ramMode = true;
-                Invoke("resetRam", 10f);
+                timeBucket = 0;
+                if (UnityEngine.Random.Range(0f, 1f) > 0.0f)
+                {
+                    if (UnityEngine.Random.Range(0f, 1f) > 2f)
+                    {
+                        ramMode = true;
+                        Invoke("resetRam", 10f);
+                    }
+                    else
+                    {
+                        lazerMode = true;
+                        Invoke("resetLazer", 10f);
+                    }
+                }
             }
-        }
-        if (!ramMode)
-            rb.AddForce(transform.forward * moveSpeed, ForceMode.Force);
-        else
-        {
-            if (timeBucket > 5f)
-            {
-                rb.AddForce(transform.forward * moveSpeed * 4, ForceMode.Force);
-            }
-            else
-            {
+            if (!ramMode && !lazerMode)
+                rb.AddForce(transform.forward * moveSpeed, ForceMode.Force);
+            else{
+                if (ramMode){
+                    if (timeBucket > 5f){
+                        rb.AddForce(transform.forward * moveSpeed * 2.5f, ForceMode.Force);
+                        }
+                    else{
 
+                    }
+                }
+                else if (lazerMode){
+
+                    if (timeBucket > 5f){
+                        Quaternion toRotation2 = transform.rotation * Quaternion.Euler(90f, 0, 0);
+                        GameObject gb = Instantiate(lazer, lazerPoint.position, transform.rotation);
+                        gb.GetComponent<Collider>().enabled = false;
+                        StartCoroutine(enable(gb.GetComponent<Collider>()));
+                        Rigidbody rb2 = gb.GetComponent<Rigidbody>();
+                        rb2.AddForce(gb.transform.forward * 1000f, ForceMode.Impulse);
+                        gb.transform.rotation = toRotation2;
+                        timeBucket -= .05f;
+
+                    }
+                    else{
+
+                    }
+                }
             }
-        }
         if (!ramMode)
-        {
-            fireMain();
-            fireMini();
-            fireMissile();
-        }
+            if (!ramMode && !lazerMode)
+            {
+                fireMain();
+                fireMini();
+                fireMissile();
+            }
         mainTimer += Time.deltaTime;
         miniTimer += Time.deltaTime;
         missileTimer += Time.deltaTime;
         timeBucket += Time.deltaTime;
     }
+    IEnumerator enable(Collider c)
+    {
+        yield return new WaitForSeconds(.1f);
+        c.enabled = true;
+    }
     void resetRam()
     {
         ramMode = false;
+    }
+    void resetLazer()
+    {
+        lazerMode = false;
     }
     void fireMain()
     {
@@ -159,12 +199,12 @@ public class boss : MonoBehaviour
     }
     void part1()
     {
-        if (count < 50)
+        if (count < 40)
             Invoke("part1", .1f);
         count++;
         GameObject go = Instantiate(missileAttack, missilePoint.position, Quaternion.identity);
         Rigidbody rb = go.GetComponent<Rigidbody>();
-        rb.AddForce(go.transform.up * 50f, ForceMode.Impulse);
+        rb.AddForce(go.transform.up * 100f, ForceMode.Impulse);
         StartCoroutine(part2(go));
 
     }
@@ -179,7 +219,7 @@ public class boss : MonoBehaviour
                 new Vector3(UnityEngine.Random.Range(-deviationMissile, deviationMissile), UnityEngine.Random.Range(-deviationMissile, deviationMissile), UnityEngine.Random.Range(-deviationMissile, deviationMissile)));
         Quaternion toRotation = Quaternion.LookRotation(relativePos);
         go.transform.rotation = toRotation;
-        rb.AddForce(go.transform.forward * 80f, ForceMode.Impulse);
+        rb.AddForce(go.transform.forward * 120f, ForceMode.Impulse);
         toRotation *= Quaternion.Euler(90f, 0, 0);
         go.transform.rotation = toRotation;
     }

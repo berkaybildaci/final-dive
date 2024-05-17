@@ -439,7 +439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 39575209}
   moveSpeed: 3000
-  rotationSpeed: 10
+  rotationSpeed: 3
   shotPoint: {fileID: 1305407039}
   mainAttack: {fileID: 8421378510009136763, guid: 1875ac10f39bf5f4fbdf63e2ba6467fb, type: 3}
   mainTBA: 5
