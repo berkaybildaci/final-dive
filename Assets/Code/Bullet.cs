@@ -22,9 +22,9 @@ public class Bullet : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<EntityMovement>() != null)
+        if (collision.gameObject.GetComponent<EntityData>() != null)
         {
-            collision.gameObject.GetComponent<EntityMovement>().damage(5);
+            collision.gameObject.GetComponent<EntityData>().damage(5);
         }
         Destroy(transform.parent.gameObject);
     }

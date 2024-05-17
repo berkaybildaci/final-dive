@@ -14,9 +14,6 @@ public class Teammate_AI : MonoBehaviour
 
     public LayerMask whatIsGround, whatIsPlayer, whatIsEnemy, whatIsWall;
 
-
-    public float health;
-
     //Attacking
     public float timeBetweenAttacks;
     bool alreadyAttacked;
@@ -120,21 +117,6 @@ public class Teammate_AI : MonoBehaviour
     private void ResetAttack()
     {
         alreadyAttacked = false;
-    }
-
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-
-        if (health <= 0)
-        {
-            Invoke(nameof(DestroyEnemy), 0.5f);
-        }
-    }
-
-    private void DestroyEnemy()
-    {
-        Destroy(gameObject);
     }
 
     private void OnDrawGizmosSelected()

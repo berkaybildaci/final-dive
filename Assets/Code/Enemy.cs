@@ -5,15 +5,12 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-  public NavMeshAgent agent;
+    public NavMeshAgent agent;
 
     public Transform player;
     private Transform shotPoint;
 
     public LayerMask whatIsGround, whatIsPlayer, whatIsWall;
-
-    
-    public float health;
 
 
     //Patroling
@@ -142,27 +139,11 @@ public class Enemy : MonoBehaviour
         alreadyAttacked = false;
     }
 
-    public void TakeDamage(int damage)
-    {
-        health -= damage;
-
-        if (health <= 0)
-        {
-            Invoke(nameof(DestroyEnemy), 0.5f);
-        }
-    }
-
-    private void DestroyEnemy()
-    {
-        Destroy(gameObject);
-    }
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
-
     }
 }
