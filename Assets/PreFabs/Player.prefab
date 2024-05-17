@@ -1164,7 +1164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 2707351559481991320}
   pickedUp: 0
-  bulletPrefab: {fileID: 3599061298821721884, guid: e3f0885e0f40c4af8851108279f49710, type: 3}
+  bulletPrefab: {fileID: 1357193239522952466, guid: 5b38d22d89470f74cb5bce8f7b1f5528, type: 3}
   shotPoint: {fileID: 5127691560535336603}
   muzzleFlash: {fileID: 8391170963941011748}
 --- !u!1001 &8391714693702160618
