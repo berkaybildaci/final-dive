@@ -103,6 +103,7 @@ Transform:
   - {fileID: 7870410175863633543}
   - {fileID: 3902301677002012940}
   - {fileID: 598306406858047848}
+  - {fileID: 7979484558912549567}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 9, z: 0}
 --- !u!114 &-5692928200119354672
@@ -223,7 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grenade: {fileID: 5181336601655348339, guid: 1dfd6835794fa994393593afa918ca8e, type: 3}
   useful: {fileID: 1567847561329902742}
-  shotPoint: {fileID: 0}
+  shotPoint: {fileID: 7979484558912549567}
 --- !u!114 &7404517465155294062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,6 +378,37 @@ MonoBehaviour:
   outlineShaderMaterial: {fileID: 0}
   renderTexture: {fileID: 0}
   extraRenderTexture: {fileID: 0}
+--- !u!1 &4200105726137188385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7979484558912549567}
+  m_Layer: 7
+  m_Name: GrenadePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7979484558912549567
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4200105726137188385}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.26}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8966165731460605578}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8450258507356443453
 GameObject:
   m_ObjectHideFlags: 0
