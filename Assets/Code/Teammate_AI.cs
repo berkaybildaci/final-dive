@@ -106,7 +106,7 @@ public class Teammate_AI : MonoBehaviour
         if (!alreadyAttacked)
         {
             ///Attack code here
-            Rigidbody rb = Instantiate(projectile, shotPoint.transform.position, transform.rotation * projectile.transform.rotation).GetComponentInChildren<Rigidbody>();
+            Rigidbody rb = Instantiate(projectile, shotPoint.transform.position, transform.rotation * projectile.transform.rotation, GameObject.Find("Bullets").transform).GetComponentInChildren<Rigidbody>();
             rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
 
             alreadyAttacked = true;

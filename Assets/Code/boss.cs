@@ -1,4 +1,4 @@
-using System;
+/*using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -62,7 +62,7 @@ public class boss : MonoBehaviour
             rb.AddForce(transform.forward * 10, ForceMode.Force);
         }
         */
-        
+        /*
 <<<<<<< Updated upstream
         if(timeBucket > 20)
 =======
@@ -232,4 +232,4 @@ public class boss : MonoBehaviour
     {
         if (collision.gameObject.name == "Player") Destroy(collision.gameObject);
     }
-}
+}*/
