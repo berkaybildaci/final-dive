@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using TMPro;
 using UnityEngine;
 
 public class boss : MonoBehaviour
@@ -39,13 +40,14 @@ public class boss : MonoBehaviour
     public Transform lazerPoint;
     public GameObject lazer;
     private float delay;
+    
     // Start is called before the first frame update
     void Start()
     {
         rBody = GetComponent<Rigidbody>();
         rBody.freezeRotation = true;
         ramMode = false;
-        lazerMode = true;
+        lazerMode = false;
         delay = 0;
     }
 
@@ -91,7 +93,7 @@ public class boss : MonoBehaviour
             else{
                 if (ramMode){
                     if (timeBucket > 5f){
-                        rb.AddForce(transform.forward * moveSpeed * 3f, ForceMode.Force);
+                        rb.AddForce(transform.forward * moveSpeed * 8f, ForceMode.Force);
                         }
                     else{
 
@@ -200,11 +202,11 @@ public class boss : MonoBehaviour
     void part1()
     {
         if (count < 40)
-            Invoke("part1", .1f);
+            Invoke("part1", .15f);
         count++;
         GameObject go = Instantiate(missileAttack, missilePoint.position, Quaternion.identity);
         Rigidbody rb = go.GetComponent<Rigidbody>();
-        rb.AddForce(go.transform.up * 100f, ForceMode.Impulse);
+        rb.AddForce(go.transform.up * 50f, ForceMode.Impulse);
         StartCoroutine(part2(go));
 
     }
@@ -219,12 +221,14 @@ public class boss : MonoBehaviour
                 new Vector3(UnityEngine.Random.Range(-deviationMissile, deviationMissile), UnityEngine.Random.Range(-deviationMissile, deviationMissile), UnityEngine.Random.Range(-deviationMissile, deviationMissile)));
         Quaternion toRotation = Quaternion.LookRotation(relativePos);
         go.transform.rotation = toRotation;
-        rb.AddForce(go.transform.forward * 120f, ForceMode.Impulse);
+        rb.AddForce(go.transform.forward * 160f, ForceMode.Impulse);
         toRotation *= Quaternion.Euler(90f, 0, 0);
         go.transform.rotation = toRotation;
     }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "Player") Destroy(collision.gameObject);
+        
+
     }
 }
