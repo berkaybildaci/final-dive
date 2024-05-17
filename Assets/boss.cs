@@ -9,7 +9,7 @@ public class boss : MonoBehaviour
     public Transform player;
     private float timer;
     public float rotationSpeed = 10f;
-    private Rigidbody rigidbody;
+    private Rigidbody rBody;
     public Transform shotPoint;
 
     public GameObject mainAttack;
@@ -28,8 +28,8 @@ public class boss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
-        rigidbody.freezeRotation = true;
+        rBody = GetComponent<Rigidbody>();
+        rBody.freezeRotation = true;
     }
 
     // Update is called once per frame
@@ -38,7 +38,7 @@ public class boss : MonoBehaviour
         Vector3 relativePos = player.position - transform.position;
         relativePos.y = 0;
         Quaternion toRotation = Quaternion.LookRotation(relativePos);
-        rigidbody.rotation = Quaternion.Slerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+        rBody.rotation = Quaternion.Slerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         //transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * 10, ForceMode.Force);
