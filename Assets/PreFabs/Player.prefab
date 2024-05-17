@@ -97,9 +97,9 @@ MonoBehaviour:
   dashRechargeSpeed: 3
   dashPower: 15
   dashTime: 0.5
-  topCount: 10
-  bottomCount: 10
-  bobRate: 3
+  topCount: 5
+  bottomCount: -5
+  bobRate: 0.2
 --- !u!143 &4804671081516856574
 CharacterController:
   m_ObjectHideFlags: 0
