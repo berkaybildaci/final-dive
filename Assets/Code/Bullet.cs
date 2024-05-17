@@ -27,6 +27,6 @@ public class Bullet : MonoBehaviour
         {
             collision.gameObject.GetComponent<EntityData>().damage(damage);
         }
-        Destroy(gameObject);
+        Destroy(transform.parent.gameObject);
     }
 }
