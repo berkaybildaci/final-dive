@@ -38,6 +38,6 @@ public class explode : MonoBehaviour
         Destroy(gameObject);
         GameObject ps = Instantiate(grenadeExplosion.gameObject, transform.position, transform.rotation);
         ps.GetComponent<ParticleSystem>().Play();
-
     }
+    
 }
