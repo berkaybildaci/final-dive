@@ -19,12 +19,12 @@ public class Enemy : MonoBehaviour
     public float walkPointRange;
 
     //Attacking
-    public float timeBetweenAttacks;
+    private float timeBetweenAttacks = 1;
     bool alreadyAttacked;
     public GameObject projectile;
 
     //States
-    public float sightRange, attackRange;
+    private float sightRange = 30, attackRange = 10;
     public bool playerInSightRange, playerInAttackRange, playerBehindWall;
 
     //useless and delete later
@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
         }
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
         // Inside Update function, modify the conditions for chasing the player
-        if (playerInSightRange && !playerInAttackRange && !playerBehindWall)
+        if (playerInSightRange && !playerInAttackRange /*&& !playerBehindWall*/)
         {
             ChasePlayer();
         }
