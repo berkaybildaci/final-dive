@@ -12,11 +12,14 @@ public class CheckWin : MonoBehaviour
     private float gameTime = 100f; // Total game time in seconds
     private float currentTime = 0f; // Current time elapsed
     private bool gameEnded = false; // Flag to track if the game has ended
+    EntityData playerEntityData;
+
 
     void Start()
     {
         text.enabled = false;
         timer.enabled=true;
+        playerEntityData = GetComponent<EntityData>();
     }
 
     void Update()
@@ -40,6 +43,9 @@ public class CheckWin : MonoBehaviour
         if (currentTime >= gameTime)
         {
             EndGame();
+        }
+        else if((int)playerEntityData.health<=0) {
+            lose();
         }
     }
 
@@ -70,8 +76,36 @@ public class CheckWin : MonoBehaviour
     // Update UI to display win message
     timer.enabled=false;
     text.enabled = true;
-    text.text = "You Win!";
+    text.text = "Level 1 Complete";
 
+  
+
+}
+private void lose()
+{
+    GameObject[] enemies = GameObject.FindGameObjectsWithTag("EnemyContainer");
+    foreach (GameObject enemy in enemies)
+    {
+        Destroy(enemy);
+    }
+    GameObject[] enemie = GameObject.FindGameObjectsWithTag("TEAM");
+    foreach (GameObject enemy in enemie)
+    {
+        Destroy(enemy);
+    }
+    GameObject[] enemi = GameObject.FindGameObjectsWithTag("spawner");
+    foreach (GameObject enemy in enemi)
+    {
+        Destroy(enemy);
+    }
+    
+    time.fillAmount=0;
+
+    // Update UI to display win message
+    timer.enabled=false;
+    text.enabled = true;
+    text.text = "You Lose";
+    Time.timeScale = 0f;
   
 
 }
