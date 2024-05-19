@@ -7,6 +7,9 @@ TagManager:
   - Pickup
   - Enemy
   - Teammate
+  - EnemyContainer
+  - TEAM
+  - spawner
   layers:
   - Default
   - TransparentFX
