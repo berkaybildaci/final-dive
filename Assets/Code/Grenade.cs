@@ -23,6 +23,23 @@ public class Grenade : MonoBehaviour
             //rb.AddForce(transform.up*5 + useful.transform.forward * 5, ForceMode.Impulse);
             //rb.AddForce(transform.forward * 8 * 2f, ForceMode.Impulse);
             //rb.AddForce(transform.up * 8 * 2f, ForceMode.Impulse);
+            ApplyGrenadeDamage();
+
+        }
+    }
+       void ApplyGrenadeDamage()
+    {
+        // Find the player GameObject
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            // Get the EntityData component from the player
+            EntityData playerEntityData = player.GetComponent<EntityData>();
+            if (playerEntityData != null)
+            {
+                // Apply grenade damage to the player's health
+                playerEntityData.damage(10);
+            }
         }
     }
 }
