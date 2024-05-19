@@ -19,12 +19,12 @@ public class Enemy : MonoBehaviour
     public float walkPointRange;
 
     //Attacking
-    private float timeBetweenAttacks = 1;
+    private float timeBetweenAttacks = 0.5f;
     bool alreadyAttacked;
     public GameObject projectile;
 
     //States
-    private float sightRange = 30, attackRange = 10;
+    private float sightRange = 35, attackRange = 20;
     public bool playerInSightRange, playerInAttackRange, playerBehindWall;
 
     //useless and delete later

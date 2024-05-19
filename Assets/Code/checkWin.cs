@@ -9,7 +9,7 @@ public class CheckWin : MonoBehaviour
     public Image time;
 
 
-    private float gameTime = 20f; // Total game time in seconds
+    private float gameTime = 100f; // Total game time in seconds
     private float currentTime = 0f; // Current time elapsed
     private bool gameEnded = false; // Flag to track if the game has ended
 
