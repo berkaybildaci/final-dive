@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     public GameObject projectile;
 
     //States
-    private float sightRange = 35, attackRange = 20;
+    private float sightRange = 35, attackRange = 15;
     public bool playerInSightRange, playerInAttackRange, playerBehindWall;
 
     //useless and delete later
@@ -106,6 +106,7 @@ public class Enemy : MonoBehaviour
     private void ChasePlayer()
     {
         agent.SetDestination(player.position);
+        transform.LookAt(player);
     }
     private void AttackPlayer()
     {
