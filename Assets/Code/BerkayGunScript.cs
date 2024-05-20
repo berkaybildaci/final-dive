@@ -9,6 +9,8 @@ public class BerkayGunScript : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private GameObject shotPoint;
     [SerializeField] private GameObject muzzleFlash;
+    private float lastShot = 0f;
+    public float shotDelay;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,8 +23,9 @@ public class BerkayGunScript : MonoBehaviour
         if(pickedUp)
         {
             gameObject.GetComponent<MeshRenderer>().enabled = true;
-            if(Input.GetMouseButtonDown(0))
+            if(Input.GetMouseButton(0) && (Time.time - lastShot >= shotDelay))
             {
+                lastShot = Time.time;
                 Shoot();
             }
         }
@@ -31,7 +34,7 @@ public class BerkayGunScript : MonoBehaviour
     void Shoot()
     {
         GameObject bullet = Instantiate(bulletPrefab, shotPoint.transform.position, shotPoint.transform.rotation);
-        bullet.GetComponent<Rigidbody>().velocity = shotPoint.transform.forward * 40f;
+        bullet.GetComponent<Rigidbody>().velocity = shotPoint.transform.forward * 80f;
         muzzleFlash.GetComponent<ParticleSystem>().Play();
     }
 }

@@ -1,3 +1,4 @@
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
@@ -11,21 +12,13 @@ public class BigEnemy : MonoBehaviour
     private Transform shotPoint;
 
     public LayerMask whatIsGround, whatIsPlayer, whatIsWall;
-
-
-    //Patroling
-    public UnityEngine.Vector3 walkPoint;
-    bool walkPointSet;
-    private float walkPointRange = 5;
-
-    //Attacking
-    private float timeBetweenAttacks = 0f;
-    bool alreadyAttacked;
-    public GameObject projectile;
-
+    private Animator anim;
     //States
-    private float sightRange = 0, attackRange = 5;
+    private float sightRange = 15, attackRange = 5;
     public bool playerInSightRange, playerInAttackRange, playerBehindWall;
+    private bool kill, started = false;
+    private float killTime = 1f;
+    private float timeTillDeath = 0f;
 
     //useless and delete later
     private void Awake()
@@ -34,6 +27,8 @@ public class BigEnemy : MonoBehaviour
         shotPoint = gameObject.transform.GetChild(0);
         agent = GetComponent<NavMeshAgent>();
         agent.autoBraking = false;
+        anim = GetComponentInChildren<Animator>();
+        transform.forward = -transform.forward;
     }
 
     private void Update()
@@ -63,7 +58,7 @@ public class BigEnemy : MonoBehaviour
         }
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
         // Inside Update function, modify the conditions for chasing the player
-        if (playerInSightRange && !playerInAttackRange /*&& !playerBehindWall*/)
+        if (playerInSightRange && !playerInAttackRange && !playerBehindWall)
         {
             ChasePlayer();
         }
@@ -73,63 +68,32 @@ public class BigEnemy : MonoBehaviour
         }
         else if ((!playerInSightRange && !playerInAttackRange) || playerBehindWall)
         {
-            Patroling();
+            agent.SetDestination(transform.position);
         }
-    }
-    private void Patroling()
-    {
-        if (!walkPointSet) SearchWalkPoint();
-
-        if (walkPointSet)
-            agent.SetDestination(walkPoint);
-
-        UnityEngine.Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-        //Walkpoint reached
-        if (distanceToWalkPoint.magnitude < 1f)
+        if(kill == true && started == false)
         {
-            walkPointSet = false;
+            started = true;
+            timeTillDeath = Time.time;
         }
-    }
-    private void SearchWalkPoint()
-    {
-        float randomZ = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
-        float randomX = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
-
-        walkPoint = new UnityEngine.Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+        else if(started && Time.time - timeTillDeath >= killTime)
         {
-            walkPointSet = true;
+            player.GetComponent<EntityData>().damage(100);
         }
     }
     private void ChasePlayer()
     {
         agent.SetDestination(player.position);
-        transform.LookAt(player);
+        transform.LookAt(player.transform);
     }
     private void AttackPlayer()
     {
-        //Make sure enemy doesn't move
-        agent.SetDestination(transform.position);
-
+        agent.SetDestination(player.position);
         transform.LookAt(player);
-
-        if (!alreadyAttacked)
+        anim.SetTrigger("attack");
+        if(Vector3.Distance(player.transform.position, transform.position) < attackRange)
         {
-            ///Attack code here
-            Rigidbody rb = Instantiate(projectile, shotPoint.transform.position, transform.rotation * projectile.transform.rotation, GameObject.Find("Bullets").transform).GetComponentInChildren<Rigidbody>();
-            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-
-
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+            kill = true;
         }
-    }
-
-    private void ResetAttack()
-    {
-        alreadyAttacked = false;
     }
 
     private void OnDrawGizmosSelected()

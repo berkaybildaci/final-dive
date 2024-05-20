@@ -61,7 +61,6 @@ public class BerkayEnemySpawner : MonoBehaviour
             int index = Random.Range(0, enemySpawningPoints.Count);
             GameObject newEnemy = Instantiate(enemyPrefab, enemySpawningPoints[index].transform.position, Quaternion.identity);
             newEnemy.transform.SetParent(enemySpawningPoints[index].transform);
-            Debug.Log("enemy spawned in");
         }
     }
 

@@ -78,6 +78,7 @@ GameObject:
   - component: {fileID: 8550620176582919960}
   - component: {fileID: 7404517465155294062}
   - component: {fileID: 3814603098780245876}
+  - component: {fileID: 2289643538868828211}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -131,9 +132,9 @@ MonoBehaviour:
   dashRechargeSpeed: 3
   dashPower: 20
   dashTime: 0.5
-  topCount: 5
-  bottomCount: -5
-  bobRate: 2
+  topCount: 3
+  bottomCount: -3
+  bobRate: 0.2
 --- !u!143 &4804671081516856574
 CharacterController:
   m_ObjectHideFlags: 0
@@ -253,6 +254,23 @@ MonoBehaviour:
   health: 100
   maxHealth: 100
   healthBarUI: {fileID: 0}
+--- !u!114 &2289643538868828211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026722966867969729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb76f012cbfc9754da02bfbea64c9482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  timer: {fileID: 0}
+  time: {fileID: 0}
+  loseImage: {fileID: 0}
+  loses: {fileID: 0}
 --- !u!1 &2707351559481991320
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,6 +532,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8566754457807046394, guid: faa84397d45134d7baa7ad67d99535e7, type: 3}
   shotPoint: {fileID: 5127691560535336603}
   muzzleFlash: {fileID: 8391170963941011748}
+  shotDelay: 150
 --- !u!1 &5127691560535336603
 GameObject:
   m_ObjectHideFlags: 0

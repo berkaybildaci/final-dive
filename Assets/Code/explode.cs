@@ -30,7 +30,6 @@ public class explode : MonoBehaviour
             Rigidbody rb = nearbyObject.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                Debug.Log("Applying explosion force to: " + nearbyObject.gameObject.name);
                 rb.AddExplosionForce(explosionForce, transform.position, explosionRadius);
                 if(nearbyObject.GetComponent<EntityData>() != null && nearbyObject.tag == "Enemy")
                 {
