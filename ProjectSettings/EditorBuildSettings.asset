@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level1/SciFi_Warehouse.unity
     guid: 04ba57353b4f0284686265d3d150c23c
+  - enabled: 1
+    path: Assets/Scenes/Rules.unity
+    guid: 1588b8d9b2c322f41b65033a0c2e28df
+  - enabled: 1
+    path: Assets/Scenes/Controls.unity
+    guid: 9727d114fdf9ca84faa5041bc154f8a6
   m_configObjects: {}
