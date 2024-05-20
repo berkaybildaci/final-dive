@@ -1,9 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Timeline;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour

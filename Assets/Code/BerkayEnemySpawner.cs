@@ -38,6 +38,7 @@ public class BerkayEnemySpawner : MonoBehaviour
         winTime -= Time.deltaTime;
         winTimerText.text = "" + winTime;
         timerFill.fillAmount = winTime / winMaxTime;
+        
         if(winTime<0)
         {
             if(enemyCount > 10)
@@ -45,8 +46,9 @@ public class BerkayEnemySpawner : MonoBehaviour
                 enemyCount = 0;
                 winTime = winMaxTime;
             }
-            GameObject newEnemy = Instantiate(enemyPrefab, enemySpawningPoints[Random.Range(0, enemySpawningPoints.Count)].transform.position, Quaternion.identity);
-            newEnemy.transform.SetParent(enemyContainer.transform);
+            int index = Random.Range(0, enemySpawningPoints.Count);
+            GameObject newEnemy = Instantiate(enemyPrefab, enemySpawningPoints[index].transform.position, Quaternion.identity);
+            newEnemy.transform.SetParent(enemySpawningPoints[index].transform);
             enemyCount++;
             
         }
@@ -56,8 +58,9 @@ public class BerkayEnemySpawner : MonoBehaviour
         {
             startTime = Time.time;
             enemyCooldownTime = Random.Range(3, 5);
-            GameObject newEnemy = Instantiate(enemyPrefab, enemySpawningPoints[Random.Range(0, enemySpawningPoints.Count)].transform.position, Quaternion.identity);
-            newEnemy.transform.SetParent(enemyContainer.transform);
+            int index = Random.Range(0, enemySpawningPoints.Count);
+            GameObject newEnemy = Instantiate(enemyPrefab, enemySpawningPoints[index].transform.position, Quaternion.identity);
+            newEnemy.transform.SetParent(enemySpawningPoints[index].transform);
             Debug.Log("enemy spawned in");
         }
     }

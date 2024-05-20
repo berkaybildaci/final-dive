@@ -30,7 +30,7 @@ public class Teammate_AI : MonoBehaviour
         shotPoint = gameObject.transform.GetChild(0);
         agent = GetComponent<NavMeshAgent>();
         agent.autoBraking = false;
-        enemyContainer = GameObject.Find("EnemyContainer").transform;
+        enemyContainer = GameObject.Find("Enemy Container").transform;
     }
 
     private void Update()
