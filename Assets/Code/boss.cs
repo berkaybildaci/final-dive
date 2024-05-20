@@ -18,6 +18,7 @@ public class boss : MonoBehaviour
     public float mainTBA = 5f;
     public float deviationMain = 1f;
     private float mainTimer = 0;
+    public GameObject indicate;
 
 
     public GameObject miniAttack;
@@ -40,6 +41,8 @@ public class boss : MonoBehaviour
     public Transform lazerPoint;
     public GameObject lazer;
     private float delay;
+
+
     
     // Start is called before the first frame update
     void Start()
@@ -49,6 +52,7 @@ public class boss : MonoBehaviour
         ramMode = false;
         lazerMode = false;
         delay = 0;
+        indicate.SetActive(false);
     }
 
     // Update is called once per frame
@@ -56,17 +60,23 @@ public class boss : MonoBehaviour
     {
         //Quaternion sourceRotation = transform.rotation;
 
-        /*
+        
         Quaternion sourceRotation = transform.rotation;
-        Quaternion targetRotation = Quaternion.LookRotation(targetTransform.position - transform.position);
+        Vector3 relativePos = player.position - transform.position;
+        relativePos.y = 0;
+        Quaternion targetRotation = Quaternion.LookRotation(relativePos);
 
-        float maxDegreesDelta = maxRotationSpeed * Time.deltaTime;
+
+        float maxDegreesDelta = rotationSpeed * Time.deltaTime;
         transform.rotation = Quaternion.RotateTowards(sourceRotation, targetRotation, maxDegreesDelta);
-        */
+        
+
+        /*
         Vector3 relativePos = player.position - transform.position;
         relativePos.y = 0;
         Quaternion toRotation = Quaternion.LookRotation(relativePos);
         rBody.rotation = Quaternion.SlerpUnclamped(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+        */
         //transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
         Rigidbody rb = GetComponent<Rigidbody>();
 
@@ -144,6 +154,10 @@ public class boss : MonoBehaviour
     }
     void fireMain()
     {
+        if(mainTimer + 0.5f > mainTBA)
+        {
+            indicate.SetActive(true);
+        }
         if (mainTimer > mainTBA)
         {
             mainTimer = 0;
@@ -156,7 +170,7 @@ public class boss : MonoBehaviour
             rb.AddForce(go.transform.forward * 200f, ForceMode.Impulse);
             toRotation *= Quaternion.Euler(90f, 0, 0);
             go.transform.rotation = toRotation;
-
+            indicate.SetActive(false);
         }
     }
 
