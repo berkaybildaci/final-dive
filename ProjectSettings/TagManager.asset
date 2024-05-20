@@ -10,6 +10,7 @@ TagManager:
   - EnemyContainer
   - TEAM
   - spawner
+  - BigEnemyContainer
   layers:
   - Default
   - TransparentFX
