@@ -14,7 +14,7 @@ public class BigEnemy : MonoBehaviour
     public LayerMask whatIsGround, whatIsPlayer, whatIsWall;
     private Animator anim;
     //States
-    private float sightRange = 15, attackRange = 5;
+    private float sightRange = 20, attackRange = 5;
     public bool playerInSightRange, playerInAttackRange, playerBehindWall;
     private bool kill, started = false;
     private float killTime = 1f;
