@@ -7,27 +7,26 @@ public class Grenade : MonoBehaviour
     public GameObject grenade;
     public Transform useful;
     public Transform shotPoint;
-    // Start is called before the first frame update
+    public AudioClip throwSound; // Add this line
+    private AudioSource audioSource; // Add this line
+
     void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>(); // Add this line
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.G)) {
-           //Vector3 rot = new Vector3(useful.transform.rotation.x, transform.rotation.y, 0f).normalized;
-           Rigidbody rb = Instantiate(grenade, shotPoint.position, useful.rotation).GetComponent<Rigidbody>();
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            Rigidbody rb = Instantiate(grenade, shotPoint.position, useful.rotation).GetComponent<Rigidbody>();
             rb.AddForce(useful.transform.forward * 20, ForceMode.Impulse);
-            //rb.AddForce(transform.up*5 + useful.transform.forward * 5, ForceMode.Impulse);
-            //rb.AddForce(transform.forward * 8 * 2f, ForceMode.Impulse);
-            //rb.AddForce(transform.up * 8 * 2f, ForceMode.Impulse);
+            audioSource.PlayOneShot(throwSound); // Add this line
             ApplyGrenadeDamage();
-
         }
     }
-       void ApplyGrenadeDamage()
+
+    void ApplyGrenadeDamage()
     {
         // Find the player GameObject
         GameObject player = GameObject.FindGameObjectWithTag("Player");

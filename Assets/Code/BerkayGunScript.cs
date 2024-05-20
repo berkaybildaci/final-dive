@@ -9,21 +9,23 @@ public class BerkayGunScript : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private GameObject shotPoint;
     [SerializeField] private GameObject muzzleFlash;
+    public AudioSource shotSound; // Reference to the AudioSource
+
     private float lastShot = 0f;
     public float shotDelay;
-    // Start is called before the first frame update
+
     void Start()
     {
         pickedUp = false;
+        shotSound = GetComponent<AudioSource>(); // Initialize the AudioSource
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(pickedUp)
+        if (pickedUp)
         {
             gameObject.GetComponent<MeshRenderer>().enabled = true;
-            if(Input.GetMouseButton(0) && (Time.time - lastShot >= shotDelay))
+            if (Input.GetMouseButton(0) && (Time.time - lastShot >= shotDelay))
             {
                 lastShot = Time.time;
                 Shoot();
@@ -36,5 +38,6 @@ public class BerkayGunScript : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, shotPoint.transform.position, shotPoint.transform.rotation);
         bullet.GetComponent<Rigidbody>().velocity = shotPoint.transform.forward * 80f;
         muzzleFlash.GetComponent<ParticleSystem>().Play();
+        shotSound.Play(); // Play the shooting sound effect
     }
 }
