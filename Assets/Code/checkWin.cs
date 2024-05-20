@@ -16,7 +16,7 @@ public class CheckWin : MonoBehaviour
     public Image WinImage; // Reference to the Canvas that contains the "You Lose" screen
     public TextMeshProUGUI Wins; // Reference to the Canvas that contains the "You Lose" screen
 
-    private float gameTime = 100f; // Total game time in seconds
+    private float gameTime = 100; // Total game time in seconds
     private float currentTime = 0f; // Current time elapsed
     private bool gameEnded = false; // Flag to track if the game has ended
     EntityData playerEntityData;
@@ -47,6 +47,10 @@ public class CheckWin : MonoBehaviour
         {
             HandleGameTimer();
             CheckVictoryConditions();
+            if ((int)playerEntityData.health <= 0)
+        {
+            lose();
+        }
         }
     }
 
@@ -62,10 +66,7 @@ public class CheckWin : MonoBehaviour
         {
             EndGame();
         }
-        else if ((int)playerEntityData.health <= 0)
-        {
-            lose();
-        }
+        
     }
 
     private void CheckVictoryConditions()

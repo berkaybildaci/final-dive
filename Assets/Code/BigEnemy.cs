@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class BigEnemy : MonoBehaviour
 {
     public NavMeshAgent agent;
+    EntityData playerEntityData;
 
     public Transform player;
     private Transform shotPoint;
@@ -93,6 +94,7 @@ public class BigEnemy : MonoBehaviour
         if(Vector3.Distance(player.transform.position, transform.position) < attackRange)
         {
             kill = true;
+            player.GetComponent<EntityData>().damage(100);
         }
     }
 
