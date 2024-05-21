@@ -482,10 +482,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6605535418685042207, guid: 28289d259619bf64c8b37efe6f153484, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e7e37fa51340a0f44898a4c40c1e38e2, type: 2}
+    - target: {fileID: -1694105912551887428, guid: 28289d259619bf64c8b37efe6f153484, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e7e37fa51340a0f44898a4c40c1e38e2, type: 2}
+    - target: {fileID: -1164223618309748024, guid: 28289d259619bf64c8b37efe6f153484, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 81d8ac848963a0846bd7a508dfa78f8a, type: 2}
     - target: {fileID: 919132149155446097, guid: 28289d259619bf64c8b37efe6f153484, type: 3}
       propertyPath: m_Name
       value: Berserker
       objectReference: {fileID: 0}
+    - target: {fileID: 6521298287172158435, guid: 28289d259619bf64c8b37efe6f153484, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e7e37fa51340a0f44898a4c40c1e38e2, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
