@@ -36,11 +36,13 @@ public class boss : MonoBehaviour
     public Transform missilePoint;
 
     private float timeBucket = 0f;
-    private Boolean ramMode;
-    private Boolean lazerMode;
+    private bool ramMode;
+    private bool lazerMode;
     public Transform lazerPoint;
-    public GameObject lazer;
+    public LineRenderer lazer;
     private float delay;
+    public float superCooldown = 40f;
+    public float chanceRam = 0.5f;
 
 
     
@@ -81,12 +83,12 @@ public class boss : MonoBehaviour
         Rigidbody rb = GetComponent<Rigidbody>();
 
 
-            if (timeBucket > 40)
+            if (timeBucket > superCooldown)
             {
                 timeBucket = 0;
                 if (UnityEngine.Random.Range(0f, 1f) > 0.0f)
                 {
-                    if (UnityEngine.Random.Range(0f, 1f) > .5f)
+                    if (UnityEngine.Random.Range(0f, 1f) < chanceRam)
                     {
                         ramMode = true;
                         Invoke("resetRam", 10f);
@@ -103,7 +105,7 @@ public class boss : MonoBehaviour
             else{
                 if (ramMode){
                     if (timeBucket > 5f){
-                        rb.AddForce(transform.forward * moveSpeed * 8f, ForceMode.Force);
+                        rb.AddForce(transform.forward * moveSpeed * 6f, ForceMode.Force);
                         }
                     else{
 
@@ -111,7 +113,8 @@ public class boss : MonoBehaviour
                 }
                 else if (lazerMode){
 
-                    if (timeBucket > 5f){
+                    FireLaser();
+                    /*
                         Quaternion toRotation2 = transform.rotation * Quaternion.Euler(90f, 0, 0);
                         GameObject gb = Instantiate(lazer, lazerPoint.position, transform.rotation);
                         gb.GetComponent<Collider>().enabled = false;
@@ -120,12 +123,12 @@ public class boss : MonoBehaviour
                         rb2.AddForce(gb.transform.forward * 1000f, ForceMode.Impulse);
                         gb.transform.rotation = toRotation2;
                         timeBucket -= .05f;
-
-                    }
-                    else{
-
-                    }
+                    */
                 }
+                else{
+
+                }
+                
             }
         if (!ramMode)
             if (!ramMode && !lazerMode)
@@ -139,11 +142,33 @@ public class boss : MonoBehaviour
         missileTimer += Time.deltaTime;
         timeBucket += Time.deltaTime;
     }
-    IEnumerator enable(Collider c)
+    void FireLaser()
+    {
+        lazer.enabled = true;
+
+        Ray ray = new Ray(lazerPoint.position-(new Vector3(0f, 3.5f, 0f)), lazerPoint.forward);
+        RaycastHit hit;
+
+        lazer.SetPosition(0, ray.origin);
+
+        if (Physics.Raycast(ray, out hit, 9999))
+        {
+            lazer.SetPosition(1, hit.point);  // Laser hits an object within range, ends at the object.
+        }
+        else
+        {
+            lazer.SetPosition(1, ray.GetPoint(9999));  // Laser doesn't hit any objects, extend to max range.
+        }
+
+    }
+
+/*
+IEnumerator enable(Collider c)
     {
         yield return new WaitForSeconds(.1f);
         c.enabled = true;
     }
+*/
     void resetRam()
     {
         ramMode = false;
@@ -151,6 +176,7 @@ public class boss : MonoBehaviour
     void resetLazer()
     {
         lazerMode = false;
+        lazer.enabled = false;
     }
     void fireMain()
     {
