@@ -16,12 +16,12 @@ public class Teammate_AI : MonoBehaviour
 
     //Attacking
     public float timeBetweenAttacks;
-    bool alreadyAttacked;
+    private bool alreadyAttacked;
     public GameObject projectile;
 
     //States
     public float sightRange, attackRange;
-    public bool playerInSightRange, enemyInAttackRange, enemyBehindWall;
+    private bool playerInSightRange, enemyInAttackRange, enemyBehindWall;
 
     //useless and delete later
     private void Awake()
